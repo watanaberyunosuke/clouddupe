@@ -7,7 +7,6 @@ clouddupe-report/
 __pycache__/
 *.pyc
 .DS_Store
-.handoff
 .handoff/
 CLAUDE.md
 AGENTS.md
