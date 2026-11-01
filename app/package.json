@@ -8,6 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "build:web": "npm run build && node ../scripts/copy-web.mjs",
     "fetch-rclone": "node ../scripts/fetch-rclone.mjs",
+    "dmg": "node ../scripts/make-dmg.mjs",
     "tauri": "tauri"
   },
   "dependencies": {

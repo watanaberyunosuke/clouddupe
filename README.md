@@ -79,6 +79,8 @@ npm run fetch-rclone        # downloads rclone for this machine and verifies its
 npx tauri build             # output in ../target/release/bundle/
 ```
 
+For a drag-to-install DMG on macOS: `npm run dmg` (output in `../target/release/bundle/dmg/`). Add `-- --skip-build` to pack an existing `.app` without rebuilding.
+
 For development with live reload: `npx tauri dev`.
 
 ## Browser GUI
@@ -131,6 +133,7 @@ cd cli && python3 -m unittest discover -s tests   # GUI tests run when rclone is
 | PikPak hash coverage is low | Expected; enable "Also flag same-size files" to catch renamed copies |
 | HTTP 429 or slow listing | Scan sub-folders instead of whole drives |
 | macOS says the app is damaged | Clear the quarantine flag (see Install) |
+| `npx tauri build` fails with "couldn't unmount disk - Resource busy" | Use `npm run dmg` instead |
 
 ## Licence
 
