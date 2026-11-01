@@ -1,0 +1,9 @@
+target/
+app/node_modules/
+app/dist/
+app/src-tauri/binaries/
+app/src-tauri/gen/
+clouddupe-report/
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cloud Duplicate Report</title>
+<style>
+:root{--bg:#f7f7f5;--fg:#1d1d1b;--muted:#6b6b66;--card:#fff;--line:#e2e2dc;
+--ok:#1f7a4d;--warn:#a15c00;--info:#3d5a99;}
+@media (prefers-color-scheme:dark){:root{--bg:#161615;--fg:#ececea;--muted:#9a9a94;
+--card:#1f1f1e;--line:#33332f;--ok:#4fbf86;--warn:#e0a24a;--info:#8aa6e6;}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);
+font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:24px 16px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:28px 0 10px}
+.muted{color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px}
+.card b{display:block;font-size:20px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.scroll{overflow-x:auto}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+input,select{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg)}
+input{flex:1;min-width:180px}
+details{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:8px 0}
+summary{cursor:pointer;padding:10px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tag{font-size:12px;padding:1px 8px;border-radius:999px;border:1px solid currentColor}
+.confirmed{color:var(--ok)}.probable{color:var(--warn)}.possible{color:var(--info)}
+.path{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;word-break:break-all}
+.members{padding:0 12px 12px}.warn{color:var(--warn)}
+</style></head><body><main>
+<h1>Cloud Duplicate Report</h1>
+<p class="muted">Generated __GENERATED__ &middot; __TOTAL__ files scanned &middot; nothing was downloaded</p>
+<div class="cards">__CARDS__</div>
+__ERRORS__
+<h2>Hash coverage by remote</h2>
+<div class="scroll"><table><tr><th>Remote</th><th>Files</th><th>Size</th><th>With hash</th><th>Hash types</th></tr>__REMOTES__</table></div>
+<h2>Can remotes be compared by content?</h2>
+<div class="scroll"><table><tr><th>Remote A</th><th>Remote B</th><th>Common hash</th></tr>__COMPARE__</table></div>
+<h2>Duplicate groups</h2>
+<div class="controls">
+<input id="q" type="search" placeholder="Filter by path or remote">
+<select id="c"><option value="">All confidence levels</option>
+<option value="confirmed">Confirmed</option><option value="probable">Probable</option>
+<option value="possible">Possible</option></select></div>
+<p id="count" class="muted"></p>
+<div id="groups">__GROUPS__</div>
+</main>
+<script>
+const q = document.getElementById('q');
+const c = document.getElementById('c');
+const items = Array.from(document.querySelectorAll('#groups details'));
+const count = document.getElementById('count');
+function apply() {
+  const term = q.value.trim().toLowerCase();
+  const conf = c.value;
+  let shown = 0;
+  items.forEach((el) => {
+    const ok = (conf === '' || el.dataset.conf === conf)
+      && (term === '' || el.dataset.text.includes(term));
+    el.style.display = ok ? '' : 'none';
+    if (ok) { shown += 1; }
+  });
+  count.textContent = shown + ' of ' + items.length + ' groups shown';
+}
+q.addEventListener('input', apply);
+c.addEventListener('change', apply);
+apply();
+</script></body></html>
