@@ -414,9 +414,9 @@ HTML_TEMPLATE = """<!doctype html>
 <title>Cloud Duplicate Report</title>
 <style>
 :root{--bg:#f7f7f5;--fg:#1d1d1b;--muted:#6b6b66;--card:#fff;--line:#e2e2dc;
---ok:#1f7a4d;--warn:#a15c00;--info:#3d5a99;}
+--ok:#1f7a4d;--warn:#a15c00;--info:#6d4bb5;}
 @media (prefers-color-scheme:dark){:root{--bg:#161615;--fg:#ececea;--muted:#9a9a94;
---card:#1f1f1e;--line:#33332f;--ok:#4fbf86;--warn:#e0a24a;--info:#8aa6e6;}}
+--card:#1f1f1e;--line:#33332f;--ok:#4fbf86;--warn:#e0a24a;--info:#b49cf0;}}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);
 font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif}
 main{max-width:1100px;margin:0 auto;padding:24px 16px}
