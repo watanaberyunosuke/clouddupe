@@ -67,6 +67,18 @@ jobs:
       - name: Build app
         working-directory: app
         run: npx tauri build --target ${{ matrix.target }}
+      - name: Name Apple silicon package for Homebrew
+        if: matrix.target == 'aarch64-apple-darwin'
+        run: |
+          dmg=$(find "target/${{ matrix.target }}/release/bundle/dmg" -maxdepth 1 -name '*.dmg' -print -quit)
+          test -n "$dmg"
+          mv "$dmg" "target/${{ matrix.target }}/release/bundle/dmg/cloud-dupe-macos-arm64.dmg"
+      - name: Name Intel package for Homebrew
+        if: matrix.target == 'x86_64-apple-darwin'
+        run: |
+          dmg=$(find "target/${{ matrix.target }}/release/bundle/dmg" -maxdepth 1 -name '*.dmg' -print -quit)
+          test -n "$dmg"
+          mv "$dmg" "target/${{ matrix.target }}/release/bundle/dmg/cloud-dupe-macos-intel.dmg"
       - uses: actions/upload-artifact@v4
         with:
           name: cloud-dupe-${{ matrix.target }}
