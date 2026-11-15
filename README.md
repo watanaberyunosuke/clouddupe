@@ -55,6 +55,14 @@ The app is not signed with a paid developer certificate, so the system warns on 
 - macOS: right-click the app and choose Open, or run `xattr -dr com.apple.quarantine "/Applications/Cloud Dupe.app"`.
 - Windows: on the SmartScreen prompt choose More info, then Run anyway.
 
+On macOS, you can also install the latest release with Homebrew:
+
+```bash
+brew install --cask https://raw.githubusercontent.com/watanaberyunosuke/clouddupe/main/Casks/cloud-dupe.rb
+```
+
+The Homebrew cask selects the Apple silicon or Intel DMG automatically. First launch still requires approving the unsigned app in macOS.
+
 ### Use
 
 1. Add drive: pick a provider, name it, answer its questions. OAuth providers (Dropbox, Google Drive, OneDrive) open your browser to sign in.
